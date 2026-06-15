@@ -24,7 +24,3 @@ def get_performance():
 @app.get("/backtest")
 def get_backtest():
     return {"message": "Backtest results will be stored in Anything.com"}
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
