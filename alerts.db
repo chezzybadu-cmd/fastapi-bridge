@@ -1,26 +1,29 @@
-CREATE TABLE signals (
+-- Table for trading signals
+CREATE TABLE IF NOT EXISTS signals (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    timestamp TEXT,
-    symbol TEXT,
-    action TEXT,
-    confidence REAL,
-    price REAL,
-    severity TEXT
+    timestamp TEXT DEFAULT (datetime('now')),
+    symbol TEXT NOT NULL,
+    action TEXT NOT NULL,         -- e.g. "buy" or "sell"
+    confidence REAL NOT NULL,     -- confidence score %
+    price REAL NOT NULL,          -- market price at signal
+    severity TEXT NOT NULL        -- "weak", "strong", "critical"
 );
 
-CREATE TABLE escalation_log (
+-- Table for escalation logs (SMS, voice calls, push notifications)
+CREATE TABLE IF NOT EXISTS escalation_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    timestamp TEXT,
-    symbol TEXT,
-    action TEXT,
-    confidence REAL,
-    price REAL,
-    recipient TEXT,
-    outcome TEXT
+    timestamp TEXT DEFAULT (datetime('now')),
+    symbol TEXT NOT NULL,
+    action TEXT NOT NULL,
+    confidence REAL NOT NULL,
+    price REAL NOT NULL,
+    recipient TEXT NOT NULL,      -- phone number or user ID
+    outcome TEXT NOT NULL         -- e.g. "answered", "missed", "sms_sent"
 );
 
-CREATE TABLE tokens (
+-- Table for Expo push tokens (mobile app registration)
+CREATE TABLE IF NOT EXISTS tokens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    token TEXT,
-    registered_at TEXT
+    token TEXT NOT NULL UNIQUE,
+    registered_at TEXT DEFAULT (datetime('now'))
 );
