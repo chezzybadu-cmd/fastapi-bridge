@@ -1,0 +1,26 @@
+CREATE TABLE signals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp TEXT,
+    symbol TEXT,
+    action TEXT,
+    confidence REAL,
+    price REAL,
+    severity TEXT
+);
+
+CREATE TABLE escalation_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp TEXT,
+    symbol TEXT,
+    action TEXT,
+    confidence REAL,
+    price REAL,
+    recipient TEXT,
+    outcome TEXT
+);
+
+CREATE TABLE tokens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    token TEXT,
+    registered_at TEXT
+);
